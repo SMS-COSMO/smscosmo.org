@@ -1,0 +1,14 @@
+@font-face {
+    font-family: AlimamaShuHeiTi;
+    src: url('/ShuHeiTi.woff2') format("woff2");
+}
+
+@font-face {
+    font-family: 'Uncut Sans';
+    src: url('/UncutSans.woff2') format("woff2");
+}
+
+@font-face {
+    font-family: 'MiSans';
+    src: url('/MiSans.woff2') format("woff2");
+}
