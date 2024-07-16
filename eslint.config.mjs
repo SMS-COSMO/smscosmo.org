@@ -8,6 +8,7 @@ export default antfu({
   },
   typescript: true,
   vue: true,
+  unocss: true,
   ignores: ['.github/**/*', 'public/**'],
 }, {
   rules: {

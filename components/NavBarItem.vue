@@ -1,9 +1,14 @@
 <template>
-  <h1 class="text-xl font-600 text-center underline underline-offset-4 decoration-zinc-800 dark:decoration-zinc-100">
-    {{ text }}
-  </h1>
+  <NuxtLink :to="to">
+    <h1 class="text-center text-xl font-600 dark:decoration-zinc-100">
+      {{ text }}
+    </h1>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
-defineProps<{ text: string }>();
+defineProps<{
+  text: string;
+  to: string;
+}>();
 </script>

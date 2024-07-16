@@ -1,5 +1,4 @@
 // uno.config.ts
-import type { breakpointsAntDesign } from '@vueuse/core';
 import { defineConfig, presetIcons, presetUno, presetWebFonts, transformerDirectives } from 'unocss';
 
 export default defineConfig({

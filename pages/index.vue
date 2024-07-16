@@ -7,9 +7,6 @@
 
 <script setup lang="ts">
 useHeadSafe({
-  title: 'COSMO ｜ 智造无限可能',
-  bodyAttrs: {
-    class: 'w-full',
-  },
+  title: 'COSMO | 智造无限可能',
 });
 </script>

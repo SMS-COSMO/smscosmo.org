@@ -1,43 +1,126 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
-    <NavBar />
-    <div class="w-full flex flex-col max-w-6xl items-center justify-center px-4 mt-20 sm:px-8 relative">
-      <div class="w-full flex flex-col items-center justify-center gap-y-10 py-20 sm:py-28 z-10">
-        <div class="rounded-full bg-blue-100 px-8 py-1 text-blue-600 font-500 font-misans text-lg flex justify-center items-center gap-2">
-          <span>
-            🎉 我们正在招新
-          </span>
-          <span class="i-ph-arrow-right-light" />
-        </div>
-        <div class="relative w-full">
-          <h1 class="hero-gradient font-shuhei bg-clip-text text-transparent text-6xl sm:text-8xl text-center relative z-10">
-            智造
-            <br>
-            无限可能
-          </h1>
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
-            <svg width="100%" height="100%">
-              <text
-                class="dashed font-900 font-misans text-7xl sm:text-9xl" x="50%" y="50%" dominant-baseline="middle"
-                text-anchor="middle"
-              >
-                <tspan x="50%" dy="0">COSMO</tspan>
-              </text>
-            </svg>
-          </div>
-        </div>
-        <button
-          type="button"
-          class="font-misans text-xl font-500 button-shadow text-zinc-900 border border-zinc-600 rounded-lg px-4 py-2"
+  <div class="w-full flex flex-col justify-center overflow-hidden h-svh sm:px-8">
+    <TresCanvas class="opacity-50 absolute! w-full!">
+      <TresPerspectiveCamera
+        :position="[0, 0, 3]"
+        :fov="75"
+      />
+
+      <Suspense>
+        <Text3D
+          :position="[-2, 1, 0]"
+          text="#"
+          font="/FiraCodeRegular.json"
+          :bevel-thickness="0.01"
+          :bevel-size="0.02"
+          :bevel-segments="40"
+          :size="0.6"
+          :curve-segments="10"
         >
-          了解更多
-        </button>
+          <TresMeshMatcapMaterial :matcap="matcapTexture" />
+        </Text3D>
+      </Suspense>
+      <Suspense>
+        <Text3D
+          :position="[1, 1.3, 0]"
+          text="{"
+          font="/FiraCodeRegular.json"
+          :bevel-thickness="0.01"
+          :bevel-size="0.02"
+          :bevel-segments="40"
+          :size="0.6"
+          :curve-segments="10"
+        >
+          <TresMeshMatcapMaterial :matcap="matcapTexture" />
+        </Text3D>
+      </Suspense>
+      <Suspense>
+        <Text3D
+          :position="[1, -1.5, 0]"
+          text=">"
+          font="/FiraCodeRegular.json"
+          :bevel-thickness="0.01"
+          :bevel-size="0.02"
+          :bevel-segments="40"
+          :size="0.5"
+          :curve-segments="10"
+        >
+          <TresMeshMatcapMaterial :matcap="matcapTexture" />
+        </Text3D>
+      </Suspense>
+      <Suspense>
+        <Text3D
+          :position="[-2.6, -1.2, 0]"
+          text="["
+          font="/FiraCodeRegular.json"
+          :bevel-thickness="0.01"
+          :bevel-size="0.02"
+          :bevel-segments="40"
+          :size="0.6"
+          :curve-segments="10"
+        >
+          <TresMeshMatcapMaterial :matcap="matcapTexture" />
+        </Text3D>
+      </Suspense>
+      <Suspense>
+        <Text3D
+          :position="[2.4, -0.1, 0.3]"
+          text="/"
+          font="/FiraCodeRegular.json"
+          :bevel-thickness="0.01"
+          :bevel-size="0.02"
+          :bevel-segments="40"
+          :size="0.5"
+          :curve-segments="10"
+        >
+          <TresMeshMatcapMaterial :matcap="matcapTexture" />
+        </Text3D>
+      </Suspense>
+
+      <TresDirectionalLight :position="[0, 2, 4]" :intensity="1.2" cast-shadow />
+      <MouseParallax
+        :factor="0.5"
+        :ease="3"
+      />
+    </TresCanvas>
+
+    <div class="z-10 w-full flex flex-col items-center justify-center gap-y-10 py-20 sm:py-28">
+      <div class="flex items-center justify-center gap-2 rounded-full bg-blue-100 px-8 py-1 text-lg text-blue-600 font-500 font-misans">
+        <span>
+          🎉 我们正在招新
+        </span>
+        <span class="i-ph-arrow-right-light" />
       </div>
+      <div class="relative w-full">
+        <h1 class="hero-gradient relative z-10 bg-clip-text text-center text-6xl text-transparent font-shuhei sm:text-8xl">
+          智造
+          <br>
+          无限可能
+        </h1>
+        <div class="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+          <svg width="100%" height="100%">
+            <text
+              class="dashed text-7xl font-900 font-misans sm:text-9xl" x="50%" y="50%"
+              dominant-baseline="middle"
+              text-anchor="middle"
+            >
+              <tspan x="50%" dy="0">COSMO</tspan>
+            </text>
+          </svg>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="button-shadow border border-zinc-600 rounded-lg px-4 py-2 text-xl text-zinc-900 font-500 font-misans"
+      >
+        了解更多
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const matcapTexture = await useTexture(['/22.png']);
 </script>
 
 <style scoped>
