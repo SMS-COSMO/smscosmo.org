@@ -1,11 +1,10 @@
 <template>
-  <div class="w-full flex flex-col justify-center overflow-hidden h-svh sm:px-8">
+  <div class="relative h-full w-full flex flex-col justify-center overflow-hidden sm:px-8">
     <TresCanvas class="opacity-50 absolute! w-full!">
       <TresPerspectiveCamera
         :position="[0, 0, 3]"
         :fov="75"
       />
-
       <Suspense>
         <Text3D
           :position="[-2, 1, 0]"
@@ -85,12 +84,12 @@
     </TresCanvas>
 
     <div class="z-10 w-full flex flex-col items-center justify-center gap-y-10 py-20 sm:py-28">
-      <div class="flex items-center justify-center gap-2 rounded-full bg-blue-100 px-8 py-1 text-lg text-blue-600 font-500 font-misans">
+      <!-- <div class="flex items-center justify-center gap-2 rounded-full bg-blue-100 px-8 py-1 text-lg text-blue-600 font-500 font-misans">
         <span>
           🎉 我们正在招新
         </span>
         <span class="i-ph-arrow-right-light" />
-      </div>
+      </div> -->
       <div class="relative w-full">
         <h1 class="hero-gradient relative z-10 bg-clip-text text-center text-6xl text-transparent font-shuhei sm:text-8xl">
           智造
@@ -109,12 +108,6 @@
           </svg>
         </div>
       </div>
-      <button
-        type="button"
-        class="button-shadow border border-zinc-600 rounded-lg px-4 py-2 text-xl text-zinc-900 font-500 font-misans"
-      >
-        了解更多
-      </button>
     </div>
   </div>
 </template>
@@ -135,26 +128,5 @@ const matcapTexture = await useTexture(['/22.png']);
   stroke-dasharray: 5px, 5px;
   stroke-linejoin: round;
   stroke-linecap: round;
-}
-
-.button-shadow {
-  transition: all 0.3s ease-in-out;
-  box-shadow:
-    0px 1.9px 2.3px rgba(0, 0, 0, 0.009),
-    0px 4.5px 5.6px rgba(0, 0, 0, 0.014),
-    0px 8.5px 10.5px rgba(0, 0, 0, 0.019),
-    0px 15.2px 18.8px rgba(0, 0, 0, 0.025),
-    0px 28.4px 35.1px rgba(0, 0, 0, 0.032),
-    0px 68px 84px rgba(0, 0, 0, 0.05);
-}
-
-.button-shadow:hover {
-  box-shadow:
-    0px 3.5px 3.2px rgba(0, 0, 0, 0.025),
-    0px 8.4px 7.8px rgba(0, 0, 0, 0.034),
-    0px 15.8px 14.7px rgba(0, 0, 0, 0.041),
-    0px 28.1px 26.1px rgba(0, 0, 0, 0.047),
-    0px 52.6px 48.9px rgba(0, 0, 0, 0.054),
-    0px 126px 117px rgba(0, 0, 0, 0.07);
 }
 </style>
