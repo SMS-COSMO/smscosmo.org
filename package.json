@@ -16,7 +16,6 @@
     "@tresjs/cientos": "^3.9.0",
     "@tresjs/nuxt": "^3.0.1",
     "@unocss/reset": "^0.61.3",
-    "nuxt": "^3.12.3",
     "three": "^0.166.1",
     "vue": "latest"
   },
@@ -27,6 +26,7 @@
     "@unocss/nuxt": "^0.61.3",
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
-    "eslint": "^9.6.0"
+    "eslint": "^9.6.0",
+    "nuxt": "^3.12.4"
   }
 }
