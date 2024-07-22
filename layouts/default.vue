@@ -1,4 +1,5 @@
 <template>
+  <!-- <LoadingAnimation class="z-100" /> -->
   <NavBar />
   <slot />
   <div
