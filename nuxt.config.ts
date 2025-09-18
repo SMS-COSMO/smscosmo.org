@@ -4,13 +4,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   modules: [
-    '@unocss/nuxt',
+    '@nuxt/ui',
     '@vueuse/nuxt',
-    '@nuxt/image',
     '@tresjs/nuxt',
+    '@nuxt/image',
   ],
-  css: [
-    '@unocss/reset/tailwind.css',
-    './assets/main.css',
-  ],
+  fonts: {
+    families: [
+      { name: 'shuhei', src: '/ShuHeiTi.woff2', provider: 'local', preload: true },
+      { name: 'misans', src: '/MiSans.woff2', provider: 'local', preload: true },
+    ],
+  },
+  css: ['~/assets/css/main.css'],
 });

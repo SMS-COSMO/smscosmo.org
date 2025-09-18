@@ -1,6 +1,6 @@
 <template>
   <div class="relative h-full w-full flex flex-col justify-center overflow-hidden sm:px-8">
-    <TresCanvas class="opacity-50 absolute! w-full!">
+    <TresCanvas class="opacity-50 !absolute !w-full">
       <TresPerspectiveCamera
         :position="[0, 0, 3]"
         :fov="75"
@@ -84,7 +84,7 @@
     </TresCanvas>
 
     <div class="z-10 w-full flex flex-col items-center justify-center gap-y-10 py-20 sm:py-28">
-      <!-- <div class="flex items-center justify-center gap-2 rounded-full bg-blue-100 px-8 py-1 text-lg text-blue-600 font-500 font-misans">
+      <!-- <div class="flex items-center justify-center gap-2 rounded-full bg-blue-100 px-8 py-1 text-lg text-blue-400 font-500 font-misans">
         <span>
           🎉 我们正在招新
         </span>
@@ -99,7 +99,8 @@
         <div class="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2">
           <svg width="100%" height="100%">
             <text
-              class="dashed text-7xl font-900 font-misans sm:text-9xl" x="50%" y="50%"
+              class="dashed text-7xl font-[900] sm:text-9xl stroke-zinc-600" x="50%" y="50%"
+              style="font-family: 'misans', sans-seri f;"
               dominant-baseline="middle"
               text-anchor="middle"
             >
@@ -123,7 +124,6 @@ const matcapTexture = await useTexture(['/22.png']);
 
 .dashed {
   fill: none;
-  --uno: stroke-zinc-600;
   stroke-width: 1px;
   stroke-dasharray: 5px, 5px;
   stroke-linejoin: round;

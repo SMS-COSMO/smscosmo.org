@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+.font-shuhei {
+  font-family: 'shuhei', sans-serif;
+}
+
+.font-misans {
+  font-family: 'misans', sans-serif;
+}

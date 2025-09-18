@@ -1,6 +1,6 @@
 <template>
   <NuxtLink :to="to">
-    <h1 class="text-center text-xl font-600 dark:decoration-zinc-100">
+    <h1 class="text-center text-xl font-semibold dark:decoration-zinc-100">
       {{ text }}
     </h1>
   </NuxtLink>

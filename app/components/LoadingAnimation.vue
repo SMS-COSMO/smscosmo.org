@@ -7,7 +7,7 @@
       <div class="h-full flex grow items-center justify-center border-x border-blue-400 px">
         <NuxtImg src="/anim-text.svg" class="h-6" />
       </div>
-      <LoadingPing class="aspect-square h-6 stroke-blue-500" />
+      <LoadingPing class="aspect-square h-6 stroke-blue-400" />
     </div>
   </div>
 </template>
