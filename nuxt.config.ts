@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@tresjs/nuxt',
     '@nuxt/image',
+    '@nuxt/content'
   ],
   fonts: {
     families: [

@@ -13,9 +13,11 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxt/content": "^3.7.1",
     "@nuxt/ui": "4.0.0-alpha.2",
     "@tresjs/cientos": "^4.3.1",
     "@tresjs/nuxt": "^4.0.0",
+    "better-sqlite3": "^12.2.0",
     "three": "^0.180.0",
     "vue": "latest"
   },
