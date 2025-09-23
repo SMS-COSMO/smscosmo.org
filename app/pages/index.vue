@@ -1,15 +1,15 @@
 <template>
   <Hero />
   <div class="mx-auto my-25 max-w-3xl w-[80%] flex flex-col items-center justify-center container space-y-16">
-    <h3>我是测试</h3>
-    <ContentDoc path="/index" />
-    <h3>我也是测试</h3>
     <ContentItem v-for="text in texts" :key="text.title" v-bind="text" />
     <OrgStructure />
+    <Button @click="() => navigateTo('/details')">了解更多</Button>
   </div>
 </template>
 
 <script setup lang="ts">
+import OrgStructure from '~/components/OrgStructure.vue';
+
 useHeadSafe({
   title: 'COSMO | 智造无限可能',
 });
