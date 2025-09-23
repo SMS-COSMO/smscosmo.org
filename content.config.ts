@@ -1,10 +1,13 @@
-﻿import { defineCollection, defineContentConfig } from '@nuxt/content';
+﻿import { defineCollection, defineContentConfig,z } from '@nuxt/content';
 
 export default defineContentConfig({
   collections: {
-    docs: defineCollection({
+    history: defineCollection({
       type: 'page',
       source: 'history/**/*.md',
+      schema: z.object({
+        date: z.string()
+      }),
     }),
-  },
-});
+  }
+})
