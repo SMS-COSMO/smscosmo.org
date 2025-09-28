@@ -24,7 +24,7 @@
         <!-- Window buttons -->
         <div class="col-start-3 mr-2 flex justify-self-end gap-3 text-zinc-5">
           <UIcon v-if="screen === 'full'" name="i-ph:minus" class="cursor-pointer" @click="screen = 'minimized'" />
-          <UIcon name="i-ph:plus" v-else class="cursor-pointer" @click="screen = 'full'" />
+          <UIcon v-else name="i-ph:plus" class="cursor-pointer" @click="screen = 'full'" />
           <UIcon name="i-ph:square" class="cursor-pointer" @click="toggle" />
           <UIcon name="i-ph:x" class="cursor-pointer" />
         </div>

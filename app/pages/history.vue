@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div>
     <Title>组织历程</Title>
     <Hero />
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="flex justify-center gap-10">
-      <Button @click="navigateTo('/')" class="bg-blue-400 text-gray-500 border border-blue-300 px-4 py-3 rounded">
+      <Button class="bg-blue-400 text-gray-500 border border-blue-300 px-4 py-3 rounded" @click="navigateTo('/')">
         返回主页
       </Button>
     </div>
