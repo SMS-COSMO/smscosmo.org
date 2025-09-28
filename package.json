@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b",
+  "packageManager": "pnpm@10.17.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -14,20 +14,20 @@
   },
   "dependencies": {
     "@nuxt/content": "^3.7.1",
-    "@nuxt/ui": "4.0.0-alpha.2",
-    "@tresjs/cientos": "^4.3.1",
-    "@tresjs/nuxt": "^4.0.0",
-    "better-sqlite3": "^12.2.0",
+    "@nuxt/ui": "^4.0.0",
+    "@tresjs/cientos": "^5.0.0",
+    "@tresjs/nuxt": "^5.0.1",
+    "better-sqlite3": "^12.4.1",
     "three": "^0.180.0",
     "vue": "latest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.3.0",
+    "@antfu/eslint-config": "^5.4.1",
     "@iconify-json/ph": "^1.2.2",
     "@nuxt/image": "1.11.0",
     "@vueuse/core": "^13.9.0",
     "@vueuse/nuxt": "^13.9.0",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "nuxt": "^4.1.2"
   }
 }
