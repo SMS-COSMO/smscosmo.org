@@ -15,8 +15,8 @@
   "dependencies": {
     "@nuxt/content": "^3.7.1",
     "@nuxt/ui": "^4.0.0",
-    "@tresjs/cientos": "^5.0.0",
-    "@tresjs/nuxt": "^5.0.1",
+    "@tresjs/cientos": "^4.3.1",
+    "@tresjs/nuxt": "^4.0.0",
     "better-sqlite3": "^12.4.1",
     "three": "^0.180.0",
     "vue": "latest"
