@@ -1,23 +1,23 @@
-<template>
+﻿<template>
   <div>
-    <Title>组织历程</Title>
+    <Title>详细介绍</Title>
     <Hero />
     <div class="flex justify-center px-4">
       <div class="w-full max-w-4xl">
         <ul class="space-y-6">
-          <li v-for="his in history" :key="his.id">
+          <li v-for="his in history" :key="his.path">
             <div v-if="!his" class="text-center text-gray-500 py-8">
               文章未找到
             </div>
-            <div v-else class="bg-blue- rounded-lg shadow-md p-6">
+            <div v-else class="bg-blue-200 text-gray-950 rounded-lg shadow-md p-6 font-semibold font-misans">
               <ContentRenderer :value="his" />
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <div class="flex justify-center gap-10">
-      <Button class="bg-blue-400 text-gray-500 border border-blue-300 px-4 py-3 rounded" @click="navigateTo('/')">
+    <div class="flex justify-center gap-10 mt-8">
+      <Button class="bg-blue-200 text-gray-500 border border-blue-400 px-4 py-3 rounded font-semibold font-misans" @click="navigateTo('/')">
         返回主页
       </Button>
     </div>
