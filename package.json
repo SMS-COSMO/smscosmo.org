@@ -39,8 +39,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue}": [
-      "pnpm -s eslint --fix",
-      "pnpm -s lint-staged-echo || true"
+      "pnpm -s eslint --fix"
     ],
     "*.{css,scss,less}": "pnpm -s stylelint --fix"
   }
