@@ -9,8 +9,11 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint . --ext .js,.ts,.vue,.jsx,.tsx",
+    "lint:fix": "eslint . --ext .js,.ts,.vue,.jsx,.tsx --fix",
+    "stylelint": "stylelint \"**/*.{css,scss,less}\"",
+    "stylelint:fix": "stylelint \"**/*.{css,scss,less}\" --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxt/content": "^3.7.1",
@@ -23,11 +26,22 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@iconify-json/ph": "^1.2.2",
     "@nuxt/image": "1.11.0",
     "@vueuse/core": "^13.9.0",
     "@vueuse/nuxt": "^13.9.0",
     "eslint": "^9.36.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3",
     "nuxt": "^4.1.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue}": [
+      "pnpm -s eslint --fix",
+      "pnpm -s lint-staged-echo || true"
+    ],
+    "*.{css,scss,less}": "pnpm -s stylelint --fix"
   }
 }

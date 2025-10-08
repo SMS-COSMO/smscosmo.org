@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="min-h-screen bg-gradient-to-br p-8">
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold dark:text-white mb-4">

@@ -1,0 +1,2 @@
+# 自动格式化代码
+pnpm -s lint-staged

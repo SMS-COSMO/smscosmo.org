@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div>
     <Title>详细介绍</Title>
     <Hero />
