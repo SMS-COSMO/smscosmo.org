@@ -31,11 +31,9 @@
       </div>
 
       <div class="grid-nav border-b border-neutral-300 bg-white/20 backdrop-blur-lg">
-        <nav class="flex items-center h-full px-4 space-x-6">
-          <NuxtLink to="/history" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-            测试测试测试
-          </NuxtLink>
-        </nav>
+        <div class="flex justify-center items-center w-full h-full">
+          <UNavigationMenu :items="items" color="neutral" class="flex justify-center items-center flex-1" />
+        </div>
       </div>
 
       <div class="grid-main overflow-y-scroll">
@@ -92,6 +90,24 @@ useIntervalFn(
 const screen = ref<'full' | 'minimized'>('full');
 
 const { toggle } = useFullscreen();
+
+const items = ref([
+  {
+    label: 'Default',
+    icon: 'i-lucide-file-braces-corner',
+    to: '/',
+  },
+  {
+    label: 'History',
+    icon: 'i-lucide-book-open',
+    to: '/history',
+  },
+  {
+    label: 'Introduction',
+    icon: 'i-lucide-users-round',
+    to: '/introduction',
+  },
+]);
 </script>
 
 <style>
@@ -103,7 +119,7 @@ const { toggle } = useFullscreen();
     'menu main'
     'dot footer';
   grid-template-columns: 3rem 1fr;
-  grid-template-rows: 3rem 2rem 1fr 3rem;
+  grid-template-rows: 3rem 3rem 1fr 3rem;
 }
 
 .grid-menu {
@@ -129,6 +145,8 @@ const { toggle } = useFullscreen();
 .grid-nav {
   grid-area: nav;
   display: flex;
+  align-items: center;
+  min-height: 3rem;
   padding: 0 1rem;
 }
 </style>

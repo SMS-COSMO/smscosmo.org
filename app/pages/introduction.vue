@@ -16,11 +16,6 @@
         </ul>
       </div>
     </div>
-    <div class="flex justify-center gap-10 mt-8">
-      <Button class="bg-blue-200 text-gray-500 border border-blue-400 px-4 py-3 rounded font-semibold font-misans" @click="navigateTo('/')">
-        返回主页
-      </Button>
-    </div>
   </div>
 </template>
 
