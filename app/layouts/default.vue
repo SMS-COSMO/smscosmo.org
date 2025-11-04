@@ -30,6 +30,14 @@
         </div>
       </div>
 
+      <div class="grid-nav border-b border-neutral-300 bg-white/20 backdrop-blur-lg">
+        <nav class="flex items-center h-full px-4 space-x-6">
+          <NuxtLink to="/history" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            测试测试测试
+          </NuxtLink>
+        </nav>
+      </div>
+
       <div class="grid-main overflow-y-scroll">
         <slot />
       </div>
@@ -91,10 +99,11 @@ const { toggle } = useFullscreen();
   display: grid;
   grid-template-areas:
     'menu header'
+    'menu nav'
     'menu main'
     'dot footer';
   grid-template-columns: 3rem 1fr;
-  grid-template-rows: 3rem 1fr 3rem;
+  grid-template-rows: 3rem 2rem 1fr 3rem;
 }
 
 .grid-menu {
@@ -115,5 +124,11 @@ const { toggle } = useFullscreen();
 
 .grid-dot {
   grid-area: dot;
+}
+
+.grid-nav {
+  grid-area: nav;
+  display: flex;
+  padding: 0 1rem;
 }
 </style>
