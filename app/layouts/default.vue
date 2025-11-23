@@ -32,7 +32,7 @@
 
       <div class="grid-nav border-b border-neutral-300 bg-white/20 backdrop-blur-lg">
         <div class="flex justify-center items-center w-full h-full">
-          <UNavigationMenu :items="items" color="neutral" class="flex justify-center items-center flex-1" />
+          <UNavigationMenu :items="items" color="neutral" class="flex justify-center items-center flex-1 navigation-menu-spaced" />
         </div>
       </div>
 

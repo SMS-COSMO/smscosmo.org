@@ -91,15 +91,15 @@
         <span class="i-ph-arrow-right-light" />
       </div> -->
       <div class="relative w-full">
-        <h1 class="hero-gradient relative z-10 bg-clip-text text-center text-6xl text-transparent font-shuhei sm:text-8xl">
+        <h1 class="hero-gradient relative z-10 bg-clip-text text-center text-7xl text-transparent font-shuhei sm:text-9xl">
           智造
           <br>
           无限可能
         </h1>
-        <div class="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+        <div class="absolute left-1/2 top-[58%] sm:top-1/2 w-full -translate-x-1/2 -translate-y-1/2">
           <svg width="100%" height="100%">
             <text
-              class="dashed text-7xl font-[900] sm:text-9xl stroke-zinc-600" x="50%" y="50%"
+              class="dashed text-8xl font-[900] sm:text-[10rem] stroke-zinc-600" x="50%" y="56%"
               style="font-family: 'misans', sans-seri f;"
               dominant-baseline="middle"
               text-anchor="middle"
@@ -108,6 +108,18 @@
             </text>
           </svg>
         </div>
+      </div>
+      <div class="text-center text-gray-500 dark:text-gray-400 text-2xl font-medium">
+        <p>From COSMO，to the cosmos.</p>
+      </div>
+    </div>
+
+    <!-- 向下箭头指示器 -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+      <div class="animate-bounce-slow">
+        <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </div>
     </div>
   </div>
@@ -128,5 +140,18 @@ const matcapTexture = await useTexture(['/22.png']);
   stroke-dasharray: 5px, 5px;
   stroke-linejoin: round;
   stroke-linecap: round;
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
 }
 </style>
