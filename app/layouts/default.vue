@@ -12,17 +12,19 @@
       </div>
 
       <div class="grid-header grid grid-cols-3 h-12 items-center border-b border-neutral-300 bg-white/20 p-2 backdrop-blur-lg">
-        <div class="col-start-2 justify-self-center">
-          <span class="mr-1 text-blue-400 font-[700]">
-            COSMO
-          </span>
-          <span class="text-zinc-6 font-[600]">
-            智慧校园平台运研中心
-          </span>
+        <div class="col-start-2 justify-self-center sm:justify-self-center px-2 -mt-0.5 sm:mt-0">
+          <div class="flex flex-col sm:flex-row items-center sm:items-center gap-0 sm:gap-1">
+            <span class="text-blue-400 font-[700] text-xs sm:text-sm">
+              COSMO
+            </span>
+            <span class="text-zinc-6 font-[600] text-xs sm:text-sm whitespace-nowrap">
+              智慧校园平台运研中心
+            </span>
+          </div>
         </div>
 
         <!-- Window buttons -->
-        <div class="col-start-3 mr-2 flex justify-self-end gap-3 text-zinc-5">
+        <div class="col-start-3 mr-1 sm:mr-2 flex justify-self-end gap-2 sm:gap-3 text-zinc-5">
           <UIcon v-if="screen === 'full'" name="i-ph:minus" class="cursor-pointer" @click="screen = 'minimized'" />
           <UIcon v-else name="i-ph:plus" class="cursor-pointer" @click="screen = 'full'" />
           <UIcon name="i-ph:square" class="cursor-pointer" @click="toggle" />
@@ -59,11 +61,11 @@
     </div>
 
     <div
-      class="fixed right-10 top-20 h-1/3 w-1/5 bg-blue-400 blur-[200px] -z-10 transition-all"
+      class="fixed right-10 top-20 h-1/3 w-1/5 bg-blue-400 blur-[100px] sm:blur-[200px] -z-10 transition-all"
       :style="`opacity: 0.${count};`"
     />
     <div
-      class="fixed bottom-20 left-20 h-1/3 w-1/5 bg-blue-400 blur-[200px] -z-10 transition-all"
+      class="fixed bottom-20 left-20 h-1/3 w-1/5 bg-blue-400 blur-[100px] sm:blur-[200px] -z-10 transition-all"
       :style="`opacity: 0.${count};`"
     />
   </div>
@@ -148,5 +150,21 @@ const items = ref([
   align-items: center;
   min-height: 3rem;
   padding: 0 1rem;
+}
+
+@media (max-width: 640px) {
+  .grid-header {
+    min-height: 3rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .grid-header .col-start-2 {
+    max-width: calc(100% - 4rem);
+    overflow: visible;
+  }
+
+  .grid-header .col-start-3 {
+    min-width: 3rem;
+  }
 }
 </style>

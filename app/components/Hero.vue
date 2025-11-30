@@ -13,7 +13,7 @@
           :bevel-thickness="0.01"
           :bevel-size="0.02"
           :bevel-segments="40"
-          :size="0.6"
+          :size="particleSize"
           :curve-segments="10"
         >
           <TresMeshMatcapMaterial :matcap="matcapTexture" />
@@ -27,7 +27,7 @@
           :bevel-thickness="0.01"
           :bevel-size="0.02"
           :bevel-segments="40"
-          :size="0.6"
+          :size="particleSize"
           :curve-segments="10"
         >
           <TresMeshMatcapMaterial :matcap="matcapTexture" />
@@ -41,7 +41,7 @@
           :bevel-thickness="0.01"
           :bevel-size="0.02"
           :bevel-segments="40"
-          :size="0.5"
+          :size="smallParticleSize"
           :curve-segments="10"
         >
           <TresMeshMatcapMaterial :matcap="matcapTexture" />
@@ -55,7 +55,7 @@
           :bevel-thickness="0.01"
           :bevel-size="0.02"
           :bevel-segments="40"
-          :size="0.6"
+          :size="particleSize"
           :curve-segments="10"
         >
           <TresMeshMatcapMaterial :matcap="matcapTexture" />
@@ -69,7 +69,7 @@
           :bevel-thickness="0.01"
           :bevel-size="0.02"
           :bevel-segments="40"
-          :size="0.5"
+          :size="smallParticleSize"
           :curve-segments="10"
         >
           <TresMeshMatcapMaterial :matcap="matcapTexture" />
@@ -83,24 +83,24 @@
       />
     </TresCanvas>
 
-    <div class="z-10 w-full flex flex-col items-center justify-center gap-y-10 py-20 sm:py-28">
+    <div class="z-10 w-full flex flex-col items-center justify-center gap-y-6 sm:gap-y-10 py-12 sm:py-20 md:py-28 px-4">
       <!-- <div class="flex items-center justify-center gap-2 rounded-full bg-blue-100 px-8 py-1 text-lg text-blue-400 font-500 font-misans">
         <span>
           🎉 我们正在招新
         </span>
         <span class="i-ph-arrow-right-light" />
       </div> -->
-      <div class="relative w-full">
-        <h1 class="hero-gradient relative z-10 bg-clip-text text-center text-7xl text-transparent font-shuhei sm:text-9xl">
+      <div class="relative w-full max-w-full overflow-hidden">
+        <h1 class="hero-gradient relative z-10 bg-clip-text text-center text-5xl sm:text-7xl md:text-9xl text-transparent font-shuhei px-2">
           智造
           <br>
           无限可能
         </h1>
-        <div class="absolute left-1/2 top-[58%] sm:top-1/2 w-full -translate-x-1/2 -translate-y-1/2">
-          <svg width="100%" height="100%">
+        <div class="absolute left-1/2 top-[58%] sm:top-1/2 w-full -translate-x-1/2 -translate-y-1/2 px-2">
+          <svg width="100%" height="100%" class="max-w-full">
             <text
-              class="dashed text-8xl font-[900] sm:text-[10rem] stroke-zinc-600" x="50%" y="56%"
-              style="font-family: 'misans', sans-seri f;"
+              class="dashed text-6xl sm:text-8xl md:text-[10rem] font-[900] stroke-zinc-600" x="50%" y="56%"
+              style="font-family: 'misans', sans-serif;"
               dominant-baseline="middle"
               text-anchor="middle"
             >
@@ -109,13 +109,13 @@
           </svg>
         </div>
       </div>
-      <div class="text-center text-gray-500 dark:text-gray-400 text-2xl font-medium">
+      <div class="text-center text-gray-500 dark:text-gray-400 text-base sm:text-xl md:text-2xl font-medium px-4">
         <p>From COSMO，to the cosmos.</p>
       </div>
     </div>
 
     <!-- 向下箭头指示器 -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+    <div class="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
       <div class="arrow-indicator">
         <svg class="w-7 h-7 text-gray-400 dark:text-gray-500" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 18L6 12h12z" />
@@ -127,6 +127,24 @@
 
 <script setup lang="ts">
 const matcapTexture = await useTexture(['/22.png']);
+
+// 响应式粒子大小：移动端小，PC端大
+const isMobile = ref(false);
+
+onMounted(() => {
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth < 640;
+  };
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobile);
+  });
+});
+
+// 粒子大小计算
+const particleSize = computed(() => isMobile.value ? 0.25 : 0.6);
+const smallParticleSize = computed(() => isMobile.value ? 0.22 : 0.5);
 </script>
 
 <style scoped>
