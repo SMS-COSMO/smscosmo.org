@@ -116,9 +116,9 @@
 
     <!-- 向下箭头指示器 -->
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-      <div class="animate-bounce-slow">
-        <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      <div class="arrow-indicator">
+        <svg class="w-7 h-7 text-gray-400 dark:text-gray-500" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 18L6 12h12z" />
         </svg>
       </div>
     </div>
@@ -142,16 +142,46 @@ const matcapTexture = await useTexture(['/22.png']);
   stroke-linecap: round;
 }
 
-@keyframes bounce-slow {
-  0%, 100% {
-    transform: translateY(0);
+@keyframes arrow-float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
   }
 }
 
-.animate-bounce-slow {
-  animation: bounce-slow 2s ease-in-out infinite;
+.arrow-indicator {
+  animation: arrow-float 2s ease-in-out infinite;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-indicator:hover {
+  transform: translateY(-6px) scale(1.1);
+  opacity: 1;
+}
+
+.arrow-indicator svg {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.arrow-indicator:hover svg {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+  color: #0961B9;
+}
+
+.dark .arrow-indicator:hover svg {
+  color: #60a5fa;
 }
 </style>

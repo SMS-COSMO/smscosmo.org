@@ -10,10 +10,12 @@
       >
         <div class="nav-sidebar bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-lg shadow-xl border border-blue-200/30 dark:border-gray-700/30 p-5 min-w-[200px] sm:min-w-[220px] max-h-[80vh] overflow-y-auto">
           <div class="flex items-center justify-between mb-5 pb-4 border-b border-blue-200/20 dark:border-gray-700/20">
-            <h3 class="text-lg sm:text-xl font-semibold font-misans text-blue-600 dark:text-blue-400">组织历程</h3>
+            <h3 class="text-lg sm:text-xl font-semibold font-misans text-blue-600 dark:text-blue-400">
+              组织历程
+            </h3>
             <button
-              @click="isNavOpen = false"
               class="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors p-1 rounded-md hover:bg-blue-50/50 dark:hover:bg-gray-700/50"
+              @click="isNavOpen = false"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -25,8 +27,8 @@
               v-for="(item, index) in navigationItems"
               :key="index"
               :href="`#section-${index + 1}`"
-              @click="scrollToSection(`section-${index + 1}`, $event)"
               class="nav-item block px-4 py-2.5 rounded-lg text-sm font-medium font-misans text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/60 dark:hover:bg-gray-700/60 transition-all duration-200 cursor-pointer border border-transparent hover:border-blue-200/50 dark:hover:border-gray-600/50"
+              @click="scrollToSection(`section-${index + 1}`, $event)"
             >
               {{ item }}
             </a>
@@ -37,8 +39,8 @@
       <!-- 展开按钮 -->
       <button
         v-if="!isNavOpen"
-        @click="isNavOpen = true"
         class="nav-toggle-btn fixed left-0 sm:left-4 top-1/2 -translate-y-1/2 z-40 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-r-lg p-2.5 sm:p-3 shadow-lg transition-all duration-300 hover:shadow-xl"
+        @click="isNavOpen = true"
       >
         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -48,7 +50,7 @@
       <!-- 内容区域 -->
       <div class="w-full max-w-4xl mx-auto">
         <ul class="space-y-6">
-          <li v-for="(his, index) in history" :key="`history-${index}`" :id="`section-${index + 1}`" class="scroll-mt-32">
+          <li v-for="(his, index) in history" :id="`section-${index + 1}`" :key="`history-${index}`" class="scroll-mt-32">
             <div v-if="!his" class="text-center text-gray-500 py-8">
               文章未找到
             </div>
@@ -88,9 +90,9 @@ const navigationItems = computed(() => {
 });
 
 // 滚动到指定位置
-const scrollToSection = (id: string, event: Event) => {
+function scrollToSection(id: string, event: Event) {
   event.preventDefault();
-  
+
   // 使用 nextTick 确保 DOM 已更新
   nextTick(() => {
     // 使用双重 setTimeout 确保元素已完全渲染
@@ -118,7 +120,7 @@ const scrollToSection = (id: string, event: Event) => {
       }
     }, 100);
   });
-};
+}
 </script>
 
 <style scoped>
