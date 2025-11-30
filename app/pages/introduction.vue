@@ -60,12 +60,34 @@
           </li>
         </ul>
       </div>
+
+      <!-- 回到顶部按钮 -->
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-from-class="opacity-0 scale-0"
+        enter-to-class="opacity-100 scale-100"
+        leave-active-class="transition-all duration-300 ease-in"
+        leave-from-class="opacity-100 scale-100"
+        leave-to-class="opacity-0 scale-0"
+      >
+        <button
+          v-if="showBackToTop"
+          class="back-to-top-btn fixed bottom-20 right-10 z-50 bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-full p-3 shadow-lg border border-blue-200/30 dark:border-gray-700/30 text-blue-600 dark:text-blue-400 hover:bg-blue-50/40 dark:hover:bg-gray-700/40 hover:border-blue-300/50 dark:hover:border-gray-600/50 transition-all duration-300 hover:shadow-xl hover:scale-110"
+          aria-label="回到顶部"
+          @click="scrollToTop"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      </Transition>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const isNavOpen = ref(false);
+const showBackToTop = ref(false);
 
 const { data: introducions } = await useAsyncData(() => {
   return queryCollection('introduction').all();
@@ -76,6 +98,57 @@ if (!introducions.value) {
     statusCode: 404,
     statusMessage: 'Page not found',
   });
+}
+
+// 监听滚动，控制回到顶部按钮显示
+onMounted(() => {
+  const handleScroll = () => {
+    // 检查滚动容器（.grid-main）和 window
+    const scrollContainer = document.querySelector('.grid-main');
+    let scrollTop = 0;
+
+    if (scrollContainer) {
+      scrollTop = scrollContainer.scrollTop;
+    } else {
+      scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    }
+
+    showBackToTop.value = scrollTop > 300;
+  };
+
+  // 初始检查
+  handleScroll();
+
+  // 监听滚动事件 - 同时监听容器和 window
+  const scrollContainer = document.querySelector('.grid-main');
+  if (scrollContainer) {
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // 清理函数
+  return () => {
+    if (scrollContainer) {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+    }
+    window.removeEventListener('scroll', handleScroll);
+  };
+});
+
+// 滚动到顶部
+function scrollToTop() {
+  const scrollContainer = document.querySelector('.grid-main');
+  if (scrollContainer) {
+    scrollContainer.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  } else {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 }
 
 // 生成导航项：基于内容数量生成序号
