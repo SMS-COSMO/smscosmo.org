@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@tresjs/nuxt',
     '@nuxt/image',
     '@nuxt/content',
+    'motion-v/nuxt',
   ],
   fonts: {
     families: [
