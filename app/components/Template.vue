@@ -1,6 +1,7 @@
 <!-- eslint-disable prefer-const -->
 <!-- eslint-disable unused-imports/no-unused-vars -->
 <!-- 注意, 由于此处为模版, 不参与实际使用, 因而禁用了两个检查, 实际开发非必要不要这样做 -->
+<!-- 具体使用请参照tx文档中的动画组件开发指南 -->
 <script setup lang="ts">
 const props = withDefaults(defineProps<Props>(), {
   duration: 300,
