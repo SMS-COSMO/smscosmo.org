@@ -45,5 +45,15 @@
     "scss",
     "pcss",
     "postcss"
+  ],
+
+  // Tailwind IntelliSense for Nuxt + Tailwind v4 (@import "tailwindcss")
+  "tailwindCSS.experimental.configFile": "app/assets/css/main.css",
+  "tailwindCSS.includeLanguages": {
+    "vue": "html"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className"
   ]
 }
