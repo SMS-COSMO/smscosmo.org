@@ -3,9 +3,7 @@
     <motion.div
       v-if="isContainerShown"
       class="flex fixed top-0 z-50 w-full duration-500"
-      :initial="{
-        y: '-150%',
-      }"
+      :initial="containerInitial"
       :animate="{
         y: 0,
       }"
@@ -52,6 +50,15 @@ const topItem = ref(null);
 
 const isContainerShown = computed(() =>
   !props.hidden);
+const containerInitial: globalThis.Ref<{ [key: string]: number | string }> = ref({
+  y: 0,
+});
+const containerWatch = watch(isContainerShown, () => {
+  containerInitial.value = {
+    y: '-150%',
+  };
+  containerWatch();
+});
 
 const tallNavClass = 'flex m-5 p-0.5 w-full bg-blue-800/70 backdrop-blur-sm shadow-2xl rounded-md duration-500 ease-in-out';
 const shortNavClass = 'flex p-0.5 w-full bg-black/50 backdrop-blur-sm shadow-2xl duration-500 ease-in-out';
