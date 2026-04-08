@@ -23,7 +23,7 @@
             智慧校园平台运研中心
           </span>
         </div>
-        <div class="flex ml-auto align-middle font-[600]">
+        <div class="flex ml-auto align-middle font-[600] text-white">
           <div v-for="item in NavItems" :key="item.path" class="mt-auto mb-auto mr-3 hover:text-gray-400 duration-300">
             <NuxtLink :to="item.path" :title="item.description">
               {{ item.title }}
