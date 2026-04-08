@@ -12,6 +12,10 @@ export default defineNuxtConfig({
     'motion-v/nuxt',
   ],
   fonts: {
+    providers: {
+      google: false,
+      googleicons: false,
+    },
     families: [
       { name: 'shuhei', src: '/ShuHeiTi.woff2', provider: 'local', preload: true },
       { name: 'misans', src: '/MiSans.woff2', provider: 'local', preload: true },
