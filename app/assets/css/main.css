@@ -1,10 +1,18 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import url("tailwindcss");
+@import url("@nuxt/ui");
 
 .font-shuhei {
-  font-family: 'shuhei', sans-serif;
+  font-family: shuhei, sans-serif;
 }
 
 .font-misans {
-  font-family: 'misans', sans-serif;
+  font-family: misans, sans-serif;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
