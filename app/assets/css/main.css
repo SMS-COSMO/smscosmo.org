@@ -1,5 +1,5 @@
-@import url("tailwindcss");
-@import url("@nuxt/ui");
+@import "tailwindcss";
+@import "@nuxt/ui";
 
 .font-shuhei {
   font-family: shuhei, sans-serif;
