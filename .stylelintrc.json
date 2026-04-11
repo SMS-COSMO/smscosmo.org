@@ -1,5 +1,37 @@
 {
   "extends": [
     "stylelint-config-standard"
-  ]
+  ],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "layer",
+          "variants",
+          "responsive",
+          "screen",
+          "theme",
+          "utility",
+          "variant",
+          "custom-variant",
+          "source",
+          "reference"
+        ]
+      }
+    ],
+    "function-no-unknown": [
+      true,
+      {
+        "ignoreFunctions": [
+          "theme"
+        ]
+      }
+    ],
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "import-notation": null
+  }
 }
