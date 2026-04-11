@@ -1,6 +1,6 @@
 <template>
   <!-- <LoadingAnimation class="z-100" /> -->
-  <div class="p-2 h-dvh">
+  <div class="p-2 w-full h-dvh fixed top-0 left-0 overflow-y-scroll hide-scrollbar">
     <!-- <div
       class="overflow-clip border border-neutral-300 rounded-md transition-all duration-700"
       :class="[screen === 'full' ? 'w-full h-full' : 'w-[90%] h-[90%]']"
@@ -9,7 +9,7 @@
       <Navigation />
     </div>
 
-    <div class="grid-main overflow-y-scroll">
+    <div class="grid-main">
       <slot />
     </div>
 
