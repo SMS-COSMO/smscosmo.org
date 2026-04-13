@@ -1,5 +1,5 @@
-﻿<template>
-  <FirstReasonAni
+<template>
+  <FirstReason
     v-if="stage === 0"
     title1="第一个原因"
     title2="的占位符"
@@ -9,7 +9,7 @@
       console.log('First reason animation completed, moving to stage', stage);
     }"
   />
-  <SecondReasonAni
+  <SecondReason
     v-if="stage === 1"
     title1="第二个原因"
     title2="的占位符"
@@ -19,7 +19,7 @@
       console.log('Second reason animation completed, moving to stage', stage);
     }"
   />
-  <ThirdReasonAni
+  <ThirdReason
     v-if="stage === 2"
     title1="第三个原因"
     title2="的占位符"
@@ -31,9 +31,9 @@
 </template>
 
 <script lang="ts" setup>
-import FirstReasonAni from '@/components/animate/ThreeReasons/FirstReasonAni.vue';
-import SecondReasonAni from '@/components/animate/ThreeReasons/SecondReasonAni.vue';
-import ThirdReasonAni from '@/components/animate/ThreeReasons/ThirdReasons.vue';
+import FirstReason from '@/components/animate/FirstReason.vue';
+import SecondReason from '@/components/animate/SecondReason.vue';
+import ThirdReason from '@/components/animate/ThirdReasons.vue';
 
 definePageMeta({
   layout: 'fullscreen',

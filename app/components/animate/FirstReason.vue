@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div ref="container" :style="{ opacity: 0 }" class="relative top-0 left-0 w-full h-full">
     <div ref="rotateCircle" class="absolute -left-[30%] -top-[10%] w-96 h-96 border-6 border-dashed border-blue-300 rounded-full" />
     <h1 class="main-intro-text absolute left-[5%] top-[20%] w-80 h-auto">
@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { animate, stagger } from 'motion-v';
 
-const props = defineProps<{
+defineProps<{
   title1: string;
   title2: string;
   description: string;
@@ -43,7 +43,7 @@ async function InitSequence() {
   ];
   await animate(seq as any, { defaultTransition: { duration: 0.001 } });
 
-  console.log('Initialized');
+  // console.log('Initialized');
 }
 
 async function runSequence() {
@@ -64,7 +64,7 @@ async function runSequence() {
   ];
 
   await animate(seq as any);
-  console.log('First sequence completed');
+  // console.log('First sequence completed');
 }
 
 async function runAnimate() {
@@ -78,6 +78,7 @@ onMounted(() => {
 });
 </script>
 
+<!-- cosmo-only-tailwind-disable -->
 <style scoped>
 .main-intro-text {
   font-size: 2.25rem;

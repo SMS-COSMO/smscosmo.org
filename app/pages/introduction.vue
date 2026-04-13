@@ -50,7 +50,7 @@
       <!-- 内容区域 -->
       <div class="w-full max-w-4xl mx-auto">
         <ul class="space-y-6">
-          <li v-for="(intro, index) in introducions" :id="`section-${index + 1}`" :key="`intro-${index}`" class="scroll-mt-32">
+          <li v-for="(intro, index) in members" :id="`section-${index + 1}`" :key="`intro-${index}`" class="scroll-mt-32">
             <div v-if="!intro" class="text-center text-gray-500 py-8">
               文章未找到
             </div>
@@ -89,11 +89,11 @@
 const isNavOpen = ref(false);
 const showBackToTop = ref(false);
 
-const { data: introducions } = await useAsyncData(() => {
-  return queryCollection('introduction').all();
+const { data: members } = await useAsyncData(() => {
+  return queryCollection('members').all();
 });
 
-if (!introducions.value) {
+if (!members.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Page not found',
@@ -154,7 +154,7 @@ function scrollToTop() {
 // 生成导航项：基于内容数量生成序号
 const navigationItems = computed(() => {
   const items = [];
-  const introArray = Array.isArray(introducions.value) ? introducions.value : [];
+  const introArray = Array.isArray(members.value) ? members.value : [];
   const count = introArray.length;
 
   // 使用序号生成导航项
@@ -198,6 +198,7 @@ function scrollToSection(id: string, event: Event) {
 }
 </script>
 
+<!-- cosmo-only-tailwind-disable -->
 <style scoped>
 .nav-sidebar {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div ref="container" :style="{ opacity: 0 }" class="w-full h-full flex items-center justify-center">
     <h1 class="main-intro-text absolute left-[5%] top-[10%] z-10">
       {{ title1 }}
@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { animate, stagger } from 'motion-v';
 
-const props = defineProps<{
+defineProps<{
   title1: string;
   title2: string;
   description: string;
@@ -57,7 +57,7 @@ async function InitSequence() {
   ];
   await animate(seq as any, { defaultTransition: { duration: 0.001 } });
 
-  console.log('Initialized');
+  // console.log('Initialized');
 }
 
 async function runSequence() {
@@ -78,7 +78,7 @@ async function runSequence() {
     [container.value!, { opacity: [1, 0], y: [0, '-50vh'] }, { duration: 1, at: '+2' }],
   ];
   await animate(seq as any);
-  console.log('Third sequence completed');
+  // console.log('Third sequence completed');
 }
 
 async function runAnimate() {
@@ -92,6 +92,7 @@ onMounted(() => {
 });
 </script>
 
+<!-- cosmo-only-tailwind-disable -->
 <style scoped>
 .main-intro-text {
   font-size: 2.25rem;

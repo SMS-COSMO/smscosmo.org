@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div ref="container" :style="{ opacity: 0 }" class="relative top-0.5 left-0 w-full h-full">
     <svg
       class="absolute inset-0 w-full h-full"
@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { animate, stagger } from 'motion-v';
 
-const props = defineProps<{
+defineProps<{
   title1: string;
   title2: string;
   description: string;
@@ -74,7 +74,7 @@ async function InitSequence() {
   ];
   await animate(seq as any, { defaultTransition: { duration: 0.001 } });
 
-  console.log('Initialized');
+  // console.log('Initialized');
 }
 
 async function runSequence() {
@@ -98,7 +98,7 @@ async function runSequence() {
   ];
 
   await animate(seq as any);
-  console.log('Second sequence completed');
+  // console.log('Second sequence completed');
 }
 
 async function runAnimate() {
@@ -112,6 +112,7 @@ onMounted(() => {
 });
 </script>
 
+<!-- cosmo-only-tailwind-disable -->
 <style scoped>
 .main-intro-text {
   font-size: 2.25rem;
