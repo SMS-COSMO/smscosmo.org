@@ -1,5 +1,41 @@
 <template>
-  <div ref="container" :style="{ opacity: 0 }" class="relative top-0 left-0 w-full h-full">
+  <AnimateSequence
+    ref="sequenceRef"
+    :style="{ opacity: 0 }"
+    class="relative top-0 left-0 w-full h-full"
+    :init-sequence="(): AnimationSequence => [
+      [rotateCircle, { opacity: 0, rotate: 0 }, { at: '0' }],
+      [rotateCircle, { rotate: 0 }, { at: '0' }],
+      ['.main-intro-text', { opacity: 0, x: -50 }, { at: '0' }],
+      [imgBox1, { opacity: 0, y: -200, x: -100, scale: 0.8 }, { at: '0' }],
+      ['.minor-intro-text', { opacity: 0, y: 50 }, { at: '0' }],
+    ]"
+    :enter-sequence="(): AnimationSequence => [
+      [rotateCircle, { opacity: [0, 1], x: [-100, 0] }, { duration: 0.5, at: '+0.2' }],
+      ['.main-intro-text', { opacity: [0, 1], x: [-50, 0] }, { duration: 0.4, delay: stagger(0.1), at: '+0.1' }],
+      [imgBox1, { opacity: [0, 1], y: [-200, 0], x: [-100, -200], scale: [0.8, 1] }, { duration: 1, at: '+0' }],
+      ['.minor-intro-text', { opacity: [0, 1], y: [50, 0] }, { duration: 0.5, at: '+1' }],
+    ]"
+    :exit-sequence="(): AnimationSequence => [
+      ['.main-intro-text', { opacity: [1, 0], x: [0, -50] }, { duration: 0.2, at: '+0.3' }],
+      [imgBox1, { opacity: [1, 0], y: [0, -200], x: [-200, -100], scale: [1, 0.8] }, { duration: 0.3, at: '+0.1' }],
+      [rotateCircle, { opacity: [1, 0], x: [0, -100] }, { duration: 0.5, at: '+0' }],
+      ['.minor-intro-text', { opacity: [1, 0], y: [0, 50] }, { duration: 0.2, at: '<' }],
+      [{ opacity: [1, 0] }, { duration: 0.3, at: '+1' }],
+    ]"
+
+    :enter-delay="5000"
+    :exit-delay="3000"
+
+    @init-complete="console.log('Init Complete')"
+    @enter-start="() => {
+      console.log('Enter Start')
+      animate(rotateCircle!, { rotate: 360 }, { duration: 15, ease: 'linear', repeat: Infinity });
+    }"
+    @enter-complete="console.log('Enter Complete')"
+    @exit-start="console.log('Exit Start')"
+    @exit-complete="console.log('Exit Complete'); emit('onComplete')"
+  >
     <div ref="rotateCircle" class="absolute -left-[30%] -top-[10%] w-96 h-96 border-6 border-dashed border-blue-300 rounded-full" />
     <h1 class="main-intro-text absolute left-[5%] top-[20%] w-80 h-auto">
       {{ title1 }}
@@ -13,11 +49,13 @@
     <span class="minor-intro-text absolute left-[5%] top-[70%] w-80 h-auto">
       {{ description }}
     </span>
-  </div>
+  </AnimateSequence>
 </template>
 
 <script setup lang="ts">
+import type { AnimationSequence } from 'motion-v';
 import { animate, stagger } from 'motion-v';
+import AnimateSequence from './AnimateSequence.vue';
 
 defineProps<{
   title1: string;
@@ -28,53 +66,24 @@ const emit = defineEmits<{
   (e: 'onComplete'): void;
 }>();
 
-const container = ref<HTMLElement>();
+const sequenceRef = ref<InstanceType<typeof AnimateSequence>>();
 const rotateCircle = ref<HTMLElement>();
 const imgBox1 = ref<HTMLElement>();
 
-async function InitSequence() {
-  const seq = [
-    [container.value!, { opacity: 0, y: '100vh' }, { at: '0' }],
-    [rotateCircle.value!, { opacity: 0, rotate: 0 }, { at: '<' }],
-    [rotateCircle.value!, { rotate: 0 }, { at: '<' }],
-    ['.main-intro-text-1', { opacity: 0, x: -50 }, { at: '<' }],
-    [imgBox1.value!, { opacity: 0, y: -200, x: -100, scale: 0.8 }, { at: '<' }],
-    ['.minor-intro-text-1', { opacity: 0, y: 50 }, { at: '<' }],
-  ];
-  await animate(seq as any, { defaultTransition: { duration: 0.001 } });
-
-  // console.log('Initialized');
-}
-
-async function runSequence() {
-  animate(rotateCircle.value!, { rotate: 360 }, { duration: 15, ease: 'linear', repeat: Infinity });
-  const seq = [
-
-    [container.value!, { opacity: [0, 1], y: ['100vh', 0] }, { duration: 1 }],
-
-    [rotateCircle.value!, { opacity: [0, 1] }, { duration: 0.1, at: '+0.3' }],
-
-    ['.main-intro-text', { opacity: [0, 1], x: [-50, 0] }, { duration: 0.4, delay: stagger(0.1), at: '+0.3' }],
-
-    [imgBox1.value!, { opacity: [0, 1], y: [-200, 0], x: [-100, -200], scale: [0.8, 1] }, { duration: 1, at: '<' }],
-
-    ['.minor-intro-text', { opacity: [0, 1], y: [50, 0] }, { duration: 0.5, at: '+0.1' }],
-
-    [container.value!, { opacity: [1, 0], y: [0, '-50vh'] }, { duration: 1, at: '+2' }],
-  ];
-
-  await animate(seq as any);
-  // console.log('First sequence completed');
-}
-
-async function runAnimate() {
-  await InitSequence();
-  await runSequence();
-  emit('onComplete');
-}
-
-onMounted(() => {
-  runAnimate();
+defineExpose({
+  playInit: async () => {
+    sequenceRef.value?.runInitSequence();
+  },
+  playEnter: async () => {
+    sequenceRef.value?.runEnterSequence();
+  },
+  playExit: async () => {
+    sequenceRef.value?.runExitSequence();
+  },
+  runFull: async () => {
+    await sequenceRef.value?.runFullSequence();
+  },
+  getStatus: () => sequenceRef.value?.aniStatus,
 });
 </script>
 
