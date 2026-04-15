@@ -20,6 +20,6 @@ const stage = ref(0);
 const sReasonRef = ref<InstanceType<typeof ThirdReason>>();
 
 onMounted(() => {
-  sReasonRef.value?.runFull();
+  sReasonRef.value?.playFull();
 });
 </script>

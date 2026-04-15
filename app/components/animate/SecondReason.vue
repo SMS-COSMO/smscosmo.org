@@ -1,6 +1,6 @@
 <template>
-  <AnimateSequence
-    ref="sequenceRef"
+  <AnimateHandler
+    ref="handlerRef"
     :style="{ opacity: 0 }"
     class="relative top-0 left-0 w-full h-full"
     :init-sequence="(): AnimationSequence => [
@@ -33,7 +33,7 @@
     @exit-start="console.log('Exit Start')"
     @exit-complete="console.log('Exit Complete'); emit('onComplete')"
   >
-    <div ref="container" class="relative top-0.5 left-0 w-full h-full">
+    <div class="relative top-0.5 left-0 w-full h-full">
       <svg
         class="absolute inset-0 w-full h-full"
         viewBox="0 0 100 100"
@@ -74,13 +74,14 @@
         {{ description }}
       </span>
     </div>
-  </AnimateSequence>
+  </AnimateHandler>
 </template>
 
 <script setup lang="ts">
 import type { AnimationSequence } from 'motion-v';
 import { stagger } from 'motion-v';
-import AnimateSequence from './AnimateSequence.vue';
+import { useAnimationHandler } from '~/composables/useAnimationHandler';
+import AnimateHandler from './AnimateHandler.vue';
 
 defineProps<{
   title1: string;
@@ -91,20 +92,13 @@ const emit = defineEmits<{
   (e: 'onComplete'): void;
 }>();
 
-const sequenceRef = ref<InstanceType<typeof AnimateSequence>>();
-const container = ref<HTMLElement>();
+const { handlerRef, expose } = useAnimationHandler();
 const line1 = ref<HTMLElement>();
 const line2 = ref<HTMLElement>();
 const line3 = ref<HTMLElement>();
 const imgBox1 = ref<HTMLElement>();
 
-defineExpose({
-  playInit: async () => sequenceRef.value?.runInitSequence(),
-  playEnter: async () => sequenceRef.value?.runEnterSequence(),
-  playExit: async () => sequenceRef.value?.runExitSequence(),
-  runFull: async () => await sequenceRef.value?.runFullSequence(),
-  getStatus: () => sequenceRef.value?.aniStatus,
-});
+defineExpose(expose);
 </script>
 
 <!-- cosmo-only-tailwind-disable -->

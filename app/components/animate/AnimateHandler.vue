@@ -70,8 +70,6 @@ async function runEnterSequence() {
     [container.value!, { opacity: [0, 1], y: ['100vh', 0] }, { at: '0', duration: 0.5 }],
   ];
   await runSequence(seq);
-  if (props.enterDelay)
-    await new Promise(resolve => setTimeout(resolve, props.enterDelay));
   if (props.enterSequence)
     await runSequence(props.enterSequence(), {});
   emit('enterComplete');
@@ -86,8 +84,6 @@ async function runExitSequence() {
   aniStatus.stage = 'exit';
   aniStatus.status = 'running';
   emit('exitStart');
-  if (props.exitDelay)
-    await new Promise(resolve => setTimeout(resolve, props.exitDelay));
   if (props.exitSequence) {
     await runSequence(props.exitSequence());
   }
@@ -103,8 +99,12 @@ async function runExitSequence() {
 async function runFullSequence() {
   await runInitSequence();
   // console.log('Init Sequence Completed');
+  if (props.enterDelay)
+    await new Promise(resolve => setTimeout(resolve, props.enterDelay));
   await runEnterSequence();
   // console.log('Enter Sequence Completed');
+  if (props.exitDelay)
+    await new Promise(resolve => setTimeout(resolve, props.exitDelay));
   await runExitSequence();
 }
 

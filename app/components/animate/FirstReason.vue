@@ -1,6 +1,6 @@
 <template>
-  <AnimateSequence
-    ref="sequenceRef"
+  <AnimateHandler
+    ref="handlerRef"
     :style="{ opacity: 0 }"
     class="relative top-0 left-0 w-full h-full"
     :init-sequence="(): AnimationSequence => [
@@ -49,13 +49,14 @@
     <span class="minor-intro-text absolute left-[5%] top-[70%] w-80 h-auto">
       {{ description }}
     </span>
-  </AnimateSequence>
+  </AnimateHandler>
 </template>
 
 <script setup lang="ts">
 import type { AnimationSequence } from 'motion-v';
 import { animate, stagger } from 'motion-v';
-import AnimateSequence from './AnimateSequence.vue';
+import { useAnimationHandler } from '@/composables/useAnimationHandler';
+import AnimateHandler from './AnimateHandler.vue';
 
 defineProps<{
   title1: string;
@@ -66,25 +67,12 @@ const emit = defineEmits<{
   (e: 'onComplete'): void;
 }>();
 
-const sequenceRef = ref<InstanceType<typeof AnimateSequence>>();
+const { handlerRef, expose } = useAnimationHandler();
+
 const rotateCircle = ref<HTMLElement>();
 const imgBox1 = ref<HTMLElement>();
 
-defineExpose({
-  playInit: async () => {
-    sequenceRef.value?.runInitSequence();
-  },
-  playEnter: async () => {
-    sequenceRef.value?.runEnterSequence();
-  },
-  playExit: async () => {
-    sequenceRef.value?.runExitSequence();
-  },
-  runFull: async () => {
-    await sequenceRef.value?.runFullSequence();
-  },
-  getStatus: () => sequenceRef.value?.aniStatus,
-});
+defineExpose(expose);
 </script>
 
 <!-- cosmo-only-tailwind-disable -->

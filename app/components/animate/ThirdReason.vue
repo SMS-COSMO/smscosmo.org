@@ -1,6 +1,6 @@
 <template>
-  <AnimateSequence
-    ref="sequenceRef"
+  <AnimateHandler
+    ref="handlerRef"
     :style="{ opacity: 0 }"
     class="relative top-0 left-0 w-full h-full"
     :init-sequence="(): AnimationSequence => [
@@ -14,16 +14,19 @@
       ['.main-intro-text', { opacity: [0, 1], x: [-50, 0] }, { duration: 0.3, delay: stagger(0.1), at: '+0.3', type: 'spring' }],
       ['.minor-intro-text', { opacity: [0, 1], y: [200, 0] }, { duration: 0.5, at: '+0.4', type: 'spring' }],
       [thirdLine, { opacity: [0, 1], x: [-100, 0] }, { duration: 1, at: '<' }],
-      [thirdLine, { strokeDashoffset: [0, -15] }, { duration: 1, at: '-0.05', repeat: 10, ease: 'linear' }],
     ]"
     :exit-sequence="(): AnimationSequence => [
-      [thirdLine, { opacity: [1, 0], x: [0, 100] }, { duration: 1, at: '-0.05' }],
+      [thirdLine, { opacity: [1, 0], x: [0, 100] }, { duration: 1, at: '0.05' }],
       ['.main-intro-text', { opacity: [1, 0], x: [0, -50] }, { duration: 0.3, at: '+0.2' }],
       ['.minor-intro-text', { opacity: [1, 0], y: [0, 50] }, { duration: 0.3, at: '+0.1' }],
       [imgBox1, { opacity: [1, 0], y: [0, -200], scale: [1, 0.4] }, { duration: 0.4, at: '+0.2' }],
     ]"
+    :exit-delay="10000"
     @init-complete="console.log('Init Complete')"
-    @enter-start="() => console.log('Enter Start')"
+    @enter-start="() => {
+      console.log('Enter Start')
+      animate(thirdLine, { strokeDashoffset: [0, -15] }, { duration: 1, repeat: Infinity, ease: 'linear' });
+    }"
     @enter-complete="console.log('Enter Complete')"
     @exit-start="console.log('Exit Start')"
     @exit-complete="console.log('Exit Complete'); emit('onComplete')"
@@ -58,13 +61,14 @@
         一个占位用的，以后存放图片
       </div>
     </div>
-  </AnimateSequence>
+  </AnimateHandler>
 </template>
 
 <script setup lang="ts">
 import type { AnimationSequence } from 'motion-v';
-import { stagger } from 'motion-v';
-import AnimateSequence from './AnimateSequence.vue';
+import { animate, stagger } from 'motion-v';
+import { useAnimationHandler } from '~/composables/useAnimationHandler';
+import AnimateHandler from './AnimateHandler.vue';
 
 defineProps<{
   title1: string;
@@ -75,18 +79,12 @@ const emit = defineEmits<{
   (e: 'onComplete'): void;
 }>();
 
-const sequenceRef = ref<InstanceType<typeof AnimateSequence>>();
+const { handlerRef, expose } = useAnimationHandler();
 const container = ref<HTMLElement>();
 const imgBox1 = ref<HTMLElement>();
 const thirdLine = ref<HTMLElement>();
 
-defineExpose({
-  playInit: async () => sequenceRef.value?.runInitSequence?.(),
-  playEnter: async () => sequenceRef.value?.runEnterSequence?.(),
-  playExit: async () => sequenceRef.value?.runExitSequence?.(),
-  runFull: async () => await sequenceRef.value?.runFullSequence?.(),
-  getStatus: () => sequenceRef.value?.aniStatus,
-});
+defineExpose(expose);
 </script>
 
 <!-- cosmo-only-tailwind-disable -->
