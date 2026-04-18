@@ -23,8 +23,6 @@
     ]"
     :exit-delay="5"
     :show-progress-bar="true"
-    :enter-duration="4"
-    :exit-duration="5"
     @init-complete="console.log('Init Complete')"
     @enter-start="() => {
       console.log('Enter Start')

@@ -27,8 +27,6 @@
       [imgBox1, { opacity: [1, 0], y: [0, -200], scale: [1, 0.4] }, { duration: 0.3, at: '+0.1' }],
       ['.minor-intro-text', { opacity: [1, 0], y: [0, 50] }, { duration: 0.3, at: '+0.2' }],
     ]"
-    :enter-duration="2"
-    :exit-duration="1"
     @init-complete="console.log('Init Complete')"
     @enter-start="() => console.log('Enter Start')"
     @enter-complete="console.log('Enter Complete')"
