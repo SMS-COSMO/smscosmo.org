@@ -21,7 +21,10 @@
       ['.minor-intro-text', { opacity: [1, 0], y: [0, 50] }, { duration: 0.3, at: '+0.1' }],
       [imgBox1, { opacity: [1, 0], y: [0, -200], scale: [1, 0.4] }, { duration: 0.4, at: '+0.2' }],
     ]"
-    :exit-delay="10000"
+    :exit-delay="5"
+    :show-progress-bar="true"
+    :enter-duration="4"
+    :exit-duration="5"
     @init-complete="console.log('Init Complete')"
     @enter-start="() => {
       console.log('Enter Start')

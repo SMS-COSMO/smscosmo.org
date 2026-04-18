@@ -1,5 +1,5 @@
 <template>
-  <ThirdReason
+  <FirstReason
     v-if="stage === 0"
     ref="sReasonRef"
     title1="为什么选择我们？"
@@ -10,14 +10,14 @@
 </template>
 
 <script lang="ts" setup>
-import ThirdReason from '@/components/animate/ThirdReason.vue';
+import FirstReason from '@/components/animate/FirstReason.vue';
 
 definePageMeta({
   layout: 'fullscreen',
 });
 
 const stage = ref(0);
-const sReasonRef = ref<InstanceType<typeof ThirdReason>>();
+const sReasonRef = ref<InstanceType<typeof FirstReason>>();
 
 onMounted(() => {
   sReasonRef.value?.playFull();

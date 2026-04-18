@@ -23,9 +23,12 @@
       ['.minor-intro-text', { opacity: [1, 0], y: [0, 50] }, { duration: 0.2, at: '<' }],
       [{ opacity: [1, 0] }, { duration: 0.3, at: '+1' }],
     ]"
+    :show-progress-bar="true"
+    :enter-duration="2"
+    :exit-duration="1"
 
-    :enter-delay="5000"
-    :exit-delay="3000"
+    :enter-delay="3"
+    :exit-delay="3"
 
     @init-complete="console.log('Init Complete')"
     @enter-start="() => {
