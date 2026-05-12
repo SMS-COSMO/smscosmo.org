@@ -6,7 +6,7 @@ const onlyTailwindRule = {
     },
     schema: [],
     messages: {
-      onlyTailwind: 'Do not put actual content inside <style> tags in Vue files.\nPlease use Tailwind CSS only.\nIf necessary, you can add "cosmo-only-tailwind-disable" comment to skip the check for the whole file.\n你已经学了Tailwind了, 不要用css了, 这样显得很混乱',
+      onlyTailwind: 'Do not put actual content inside <style> tags in Vue files.\nPlease use Tailwind CSS only.\nIf necessary, you can add "cosmo-only-tailwind-disable" comment to skip the check for the whole file.\n出于对一致性的要求, 非必要最好不要这样做, 十分混乱. 若必要, 可以通过注释关闭报错, 方法在上面的英文部分中',
     },
   },
   create(context) {
