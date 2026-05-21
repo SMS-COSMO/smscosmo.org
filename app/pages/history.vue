@@ -59,6 +59,9 @@
             </div>
           </li>
         </ul>
+
+        <ProjectIntro class="mt-4" :markdown-content="project ?? null" />
+        <ProjectIntro class="mt-4" :markdown-content="project ?? null" />
       </div>
 
       <!-- 回到顶部按钮 -->
@@ -92,8 +95,11 @@ const showBackToTop = ref(false);
 const { data: history } = await useAsyncData(() => {
   return queryCollection('history').all();
 });
+const { data: project } = await useAsyncData(() => {
+  return queryCollection('projects').first();
+});
 
-if (!history.value) {
+if (!history.value && !project.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Page not found',
@@ -196,6 +202,7 @@ function scrollToSection(id: string, event: Event) {
 }
 </script>
 
+<!-- cosmo-only-tailwind-disable -->
 <style scoped>
 .nav-sidebar {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
