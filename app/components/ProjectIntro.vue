@@ -1,176 +1,95 @@
+<!-- eslint-disable vue/attribute-hyphenation -->
 <template>
-  <section class="project-intro">
-    <div class="container">
-      <h2 class="title">
-        {{ title }}
-      </h2>
-      <div class="project-list">
-        <div
-          v-for="(item, index) in projectList"
-          :key="item.id"
-          class="project-card"
-          :style="{ animationDelay: `${index * 0.1}s` }"
-        >
-          <div class="project-img">
-            <img :src="item.cover" :alt="item.name" loading="lazy">
-          </div>
-          <div class="project-info">
-            <h3 class="project-name">
-              {{ item.name }}
-            </h3>
-            <p class="project-desc">
-              {{ item.desc }}
-            </p>
-            <p v-if="item.developTime" class="project-meta">
-              开发时间：{{ item.developTime }}
-            </p>
-            <span class="project-tag">
-              {{ item.tag }}
-            </span>
-          </div>
+  <motion.div
+    class="w-full flex flex-col md:flex-row gap-6 md:gap-8 p-6 bg-blue-100 rounded-2xl shadow-lg"
+    :initial="{ x: -50, opacity: 0 }"
+    :whileInView="{ x: 0, opacity: 1 }"
+    :transition="{ duration: 1, type: 'spring' }"
+  >
+    <!-- 左侧图片区域 -->
+    <motion.div class="md:w-1/2 flex-shrink-0">
+      <!-- 图片容器，用于获取宽度 -->
+      <div ref="imgContainer">
+        <motion.img
+          class="w-full h-48 object-cover rounded-2xl shadow-md text-center border border-dashed border-gray-300"
+          :initial="{ opacity: 0, y: 40 }"
+          :whileInView="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 1, delay: 0.6, type: 'spring' }"
+          src="/images/test.png"
+          alt="占位图片"
+        />
+      </div>
+
+      <!-- 滑轨和滑块 -->
+      <div class="mt-4 w-full">
+        <div class="relative h-12 w-full bg-white/40 backdrop-blur-sm rounded-full shadow-inner border border-white/30">
+          <motion.h4
+            class="absolute top-1/2 -translate-y-1/2 right-15 text-sm font-medium tracking-tight text-blue-700/80"
+            :style="{ opacity: textOpacity }"
+          >
+            访问github
+          </motion.h4>
+          <motion.div
+            class="absolute top-1/2 -translate-y-1/2 w-15 h-10 bg-gradient-to-r from-white to-blue-50 rounded-full shadow-lg cursor-grab active:cursor-grabbing flex items-center justify-center gap-1 border border-blue-200/50"
+            drag="x"
+            :dragSnapToOrigin="isToOrigin"
+            :dragElastic="0.1"
+            :dragConstraints="dragConstraints"
+            :style="{ x: sliderX }"
+          >
+            <!-- 装饰小圆点，表示可拖拽 -->
+            <span class="ml-2 text-lg font-medium text-blue-600">></span>
+          </motion.div>
         </div>
       </div>
-    </div>
-  </section>
+    </motion.div>
+
+    <!-- 右侧 Markdown 内容区域（原样） -->
+    <motion.div
+      class="md:w-1/2 prose prose-lg max-w-none"
+      :initial="{ opacity: 0, x: -40 }"
+      :whileInView="{ opacity: 1, x: 0 }"
+      :transition="{ duration: 0.8, delay: 1, type: 'spring' }"
+    >
+      <ContentRenderer v-if="markdownContent" :value="markdownContent" />
+      <div v-else class="text-gray-400 italic">
+        暂无内容
+      </div>
+    </motion.div>
+  </motion.div>
 </template>
 
 <script setup lang="ts">
-interface ProjectItem {
-  id: number;
-  name: string;
-  desc: string;
-  tag: string;
-  cover: string;
-  developTime?: string;
-  team?: string;
-  detailLink?: string;
-}
+import type { Collections } from '@nuxt/content';
+import { motion } from 'motion-v';
 
-withDefaults(
-  defineProps<{
-    title?: string;
-    projectList: ProjectItem[];
-  }>(),
-  {
-    title: 'COSMO 过往项目',
-  },
-);
+defineProps<{
+  markdownContent: Collections['projects'] | null;
+}>();
+
+const imgContainer = ref<HTMLDivElement | null>(null);
+const dragConstraints = ref({ left: 0, right: 300 }); // 初始默认
+const sliderX = useMotionValue(0);
+let hasNavigated = false; // 防止重复导航
+const isToOrigin = ref(true);
+const textOpacity = useTransform(sliderX, [0, 200], [1, 0.1]);
+
+onMounted(() => {
+  if (imgContainer.value) {
+    const parentWidth = imgContainer.value.clientWidth;
+    const thumbWidth = 80; // 滑块宽度 w-20 = 5rem = 80px
+    dragConstraints.value = { left: 0, right: parentWidth - thumbWidth };
+  }
+});
+
+useMotionValueEvent(sliderX, 'change', (latest) => {
+  if (hasNavigated)
+    return; // 已经导航过一次，直接返回
+  // 当滑块拖动到右侧边界时，打开GitHub链接
+  if (latest >= dragConstraints.value.right - 2) {
+    isToOrigin.value = false;
+    hasNavigated = true;
+    navigateTo('/');
+  }
+});
 </script>
-
-<style scoped>
-.project-intro {
-  padding: 60px 20px !important;
-  background-color: #0a0a0f !important;
-  color: #fff !important;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.project-intro .container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.project-intro .title {
-  font-size: 32px;
-  text-align: center;
-  margin-bottom: 40px;
-  font-weight: 600;
-  color: #fff !important;
-}
-
-.project-intro .project-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.project-intro .project-card {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease !important;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.project-intro .project-card:hover {
-  transform: translateY(-6px) !important;
-}
-
-.project-intro .project-img {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.1);
-}
-
-.project-intro .project-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.project-intro .project-info {
-  padding: 16px;
-}
-
-.project-intro .project-name {
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: #fff !important;
-}
-
-.project-intro .project-desc {
-  font-size: 14px;
-  color: #ccc !important;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.project-intro .project-meta {
-  font-size: 12px;
-  color: #999 !important;
-  margin-bottom: 8px;
-}
-
-.project-intro .project-tag {
-  display: inline-block;
-  padding: 4px 10px;
-  font-size: 12px;
-  background: #4f46e5 !important;
-  color: #fff !important;
-  border-radius: 6px;
-}
-
-@media (max-width: 1024px) {
-  .project-intro .title {
-    font-size: 28px;
-  }
-  .project-intro .project-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .project-intro .title {
-    font-size: 24px;
-  }
-  .project-intro .project-list {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .project-intro .project-img {
-    height: 160px;
-  }
-}
-</style>
