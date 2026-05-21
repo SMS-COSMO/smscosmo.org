@@ -140,7 +140,7 @@ function getSequenceDuration(sequence: AnimationSequence): number {
     // 处理 delay 可能是函数（例如 stagger）
     let delayNum = 0;
     if (typeof delay === 'function') {
-      delayNum = 0.1;
+      delayNum = 0.3;
     } else {
       delayNum = delay || 0;
     }
