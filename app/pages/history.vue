@@ -62,6 +62,8 @@
 
         <ProjectIntro class="mt-4" :markdown-content="project ?? null" />
         <ProjectIntro class="mt-4" :markdown-content="project ?? null" />
+        <CohortChronicle class="mt-4" :markdown-content="testHistory ?? null" :on-right="true" />
+        <CohortChronicle class="mt-4" :markdown-content="testHistory ?? null" :on-right="false" />
       </div>
 
       <!-- 回到顶部按钮 -->
@@ -97,6 +99,9 @@ const { data: history } = await useAsyncData(() => {
 });
 const { data: project } = await useAsyncData(() => {
   return queryCollection('projects').first();
+});
+const { data: testHistory } = await useAsyncData(() => {
+  return queryCollection('history').first();
 });
 
 if (!history.value && !project.value) {
